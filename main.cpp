@@ -1,35 +1,26 @@
 #include <iostream>
 using namespace std;
 
-class Circle {
-private:
-    double radius;
-    string color;
-
-public:
-    Circle(double radius, string color) {
-        this->radius = radius;
-        this->color = color;
-    }
-
-    double calArea();
-    string colorPrint();
+enum Type
+{
+    ptr,
+    num
 };
 
-double Circle::calArea() {
-    return 3.14 * radius * radius;
-}
+struct Entry {
+    string name;
+    Type t;
+    Node* p;
+    int i;
+};
 
-string Circle::colorPrint() {
-    return color;
+void f (Entry* pe) {
+    if (pe -> t == num) {
+        cout << pe -> i;
+    }
 }
-
 
 int main() {
-    Circle circle(5, "Black");
-
-    cout << circle.calArea() << '\n';
-    cout << circle.colorPrint() << '\n';
 
     return 0;
 }
