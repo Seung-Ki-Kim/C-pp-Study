@@ -129,29 +129,77 @@ C_pp_Study/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/C_pp_Study.dir/build.make CMakeFiles/C_pp_Study.dir/build
 .PHONY : C_pp_Study/fast
 
-Vector.o: Vector.cpp.o
-.PHONY : Vector.o
+Cat.o: Cat.cpp.o
+.PHONY : Cat.o
 
 # target to build an object file
-Vector.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/C_pp_Study.dir/build.make CMakeFiles/C_pp_Study.dir/Vector.cpp.o
-.PHONY : Vector.cpp.o
+Cat.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/C_pp_Study.dir/build.make CMakeFiles/C_pp_Study.dir/Cat.cpp.o
+.PHONY : Cat.cpp.o
 
-Vector.i: Vector.cpp.i
-.PHONY : Vector.i
+Cat.i: Cat.cpp.i
+.PHONY : Cat.i
 
 # target to preprocess a source file
-Vector.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/C_pp_Study.dir/build.make CMakeFiles/C_pp_Study.dir/Vector.cpp.i
-.PHONY : Vector.cpp.i
+Cat.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/C_pp_Study.dir/build.make CMakeFiles/C_pp_Study.dir/Cat.cpp.i
+.PHONY : Cat.cpp.i
 
-Vector.s: Vector.cpp.s
-.PHONY : Vector.s
+Cat.s: Cat.cpp.s
+.PHONY : Cat.s
 
 # target to generate assembly for a file
-Vector.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/C_pp_Study.dir/build.make CMakeFiles/C_pp_Study.dir/Vector.cpp.s
-.PHONY : Vector.cpp.s
+Cat.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/C_pp_Study.dir/build.make CMakeFiles/C_pp_Study.dir/Cat.cpp.s
+.PHONY : Cat.cpp.s
+
+Data.o: Data.cpp.o
+.PHONY : Data.o
+
+# target to build an object file
+Data.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/C_pp_Study.dir/build.make CMakeFiles/C_pp_Study.dir/Data.cpp.o
+.PHONY : Data.cpp.o
+
+Data.i: Data.cpp.i
+.PHONY : Data.i
+
+# target to preprocess a source file
+Data.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/C_pp_Study.dir/build.make CMakeFiles/C_pp_Study.dir/Data.cpp.i
+.PHONY : Data.cpp.i
+
+Data.s: Data.cpp.s
+.PHONY : Data.s
+
+# target to generate assembly for a file
+Data.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/C_pp_Study.dir/build.make CMakeFiles/C_pp_Study.dir/Data.cpp.s
+.PHONY : Data.cpp.s
+
+Dog.o: Dog.cpp.o
+.PHONY : Dog.o
+
+# target to build an object file
+Dog.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/C_pp_Study.dir/build.make CMakeFiles/C_pp_Study.dir/Dog.cpp.o
+.PHONY : Dog.cpp.o
+
+Dog.i: Dog.cpp.i
+.PHONY : Dog.i
+
+# target to preprocess a source file
+Dog.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/C_pp_Study.dir/build.make CMakeFiles/C_pp_Study.dir/Dog.cpp.i
+.PHONY : Dog.cpp.i
+
+Dog.s: Dog.cpp.s
+.PHONY : Dog.s
+
+# target to generate assembly for a file
+Dog.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/C_pp_Study.dir/build.make CMakeFiles/C_pp_Study.dir/Dog.cpp.s
+.PHONY : Dog.cpp.s
 
 main.o: main.cpp.o
 .PHONY : main.o
@@ -177,30 +225,6 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/C_pp_Study.dir/build.make CMakeFiles/C_pp_Study.dir/main.cpp.s
 .PHONY : main.cpp.s
 
-user.o: user.cpp.o
-.PHONY : user.o
-
-# target to build an object file
-user.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/C_pp_Study.dir/build.make CMakeFiles/C_pp_Study.dir/user.cpp.o
-.PHONY : user.cpp.o
-
-user.i: user.cpp.i
-.PHONY : user.i
-
-# target to preprocess a source file
-user.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/C_pp_Study.dir/build.make CMakeFiles/C_pp_Study.dir/user.cpp.i
-.PHONY : user.cpp.i
-
-user.s: user.cpp.s
-.PHONY : user.s
-
-# target to generate assembly for a file
-user.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/C_pp_Study.dir/build.make CMakeFiles/C_pp_Study.dir/user.cpp.s
-.PHONY : user.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -210,15 +234,18 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... C_pp_Study"
-	@echo "... Vector.o"
-	@echo "... Vector.i"
-	@echo "... Vector.s"
+	@echo "... Cat.o"
+	@echo "... Cat.i"
+	@echo "... Cat.s"
+	@echo "... Data.o"
+	@echo "... Data.i"
+	@echo "... Data.s"
+	@echo "... Dog.o"
+	@echo "... Dog.i"
+	@echo "... Dog.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... user.o"
-	@echo "... user.i"
-	@echo "... user.s"
 .PHONY : help
 
 

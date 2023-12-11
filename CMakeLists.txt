@@ -9,4 +9,6 @@ add_executable(C_pp_Study main.cpp
         Cat.cpp
         Cat.h
         Animal.h
+        Data.cpp
+        Data.h
 )

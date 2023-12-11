@@ -1,3 +1,3 @@
-D:/Programming-Study/C_pp_Study/cmake-build-debug/CMakeFiles/C_pp_Study.dir
-D:/Programming-Study/C_pp_Study/cmake-build-debug/CMakeFiles/edit_cache.dir
-D:/Programming-Study/C_pp_Study/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/araina/Documents/Programming-Study/C_pp_Study/cmake-build-debug/CMakeFiles/C_pp_Study.dir
+/Users/araina/Documents/Programming-Study/C_pp_Study/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/araina/Documents/Programming-Study/C_pp_Study/cmake-build-debug/CMakeFiles/rebuild_cache.dir
