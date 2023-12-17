@@ -1,14 +1,19 @@
 #include <iostream>
-#include "Data.h"
+
 using namespace std;
 
 
-int main() {
-    Data<String_t> str_data("Hello, world!");
-    Data<Double_t> double_data(3.14);
+double square(double x) {
+    return (x * x);
+}
 
-    cout << str_data.GetData() << endl;
-    cout << double_data.GetData() << endl;
+void print_square(double x) {
+    cout << "The square of " << "x is " << square(x) << "\n";
+}
+
+int main() {
+    cout << "Hello, world!" << "\n";
+    print_square(3);
 
     return 0;
 }

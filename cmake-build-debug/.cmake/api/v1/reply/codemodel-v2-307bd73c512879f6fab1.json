@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "C_pp_Study::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-C_pp_Study-Debug-b004b44055d9fdf8367a.json",
+					"jsonFile" : "target-C_pp_Study-Debug-8148cc0ef422d00da128.json",
 					"name" : "C_pp_Study",
 					"projectIndex" : 0
 				}
@@ -55,6 +55,6 @@
 	"version" : 
 	{
 		"major" : 2,
-		"minor" : 5
+		"minor" : 6
 	}
 }

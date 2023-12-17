@@ -76,27 +76,6 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/araina/Documents/Programming-Study/C_pp_Study/Animal.h">
-			<Option target="C_pp_Study"/>
-		</Unit>
-		<Unit filename="/Users/araina/Documents/Programming-Study/C_pp_Study/Cat.cpp">
-			<Option target="C_pp_Study"/>
-		</Unit>
-		<Unit filename="/Users/araina/Documents/Programming-Study/C_pp_Study/Cat.h">
-			<Option target="C_pp_Study"/>
-		</Unit>
-		<Unit filename="/Users/araina/Documents/Programming-Study/C_pp_Study/Data.cpp">
-			<Option target="C_pp_Study"/>
-		</Unit>
-		<Unit filename="/Users/araina/Documents/Programming-Study/C_pp_Study/Data.h">
-			<Option target="C_pp_Study"/>
-		</Unit>
-		<Unit filename="/Users/araina/Documents/Programming-Study/C_pp_Study/Dog.cpp">
-			<Option target="C_pp_Study"/>
-		</Unit>
-		<Unit filename="/Users/araina/Documents/Programming-Study/C_pp_Study/Dog.h">
-			<Option target="C_pp_Study"/>
-		</Unit>
 		<Unit filename="/Users/araina/Documents/Programming-Study/C_pp_Study/main.cpp">
 			<Option target="C_pp_Study"/>
 		</Unit>

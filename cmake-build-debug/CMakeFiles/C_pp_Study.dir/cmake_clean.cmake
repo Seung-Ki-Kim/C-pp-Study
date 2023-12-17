@@ -1,10 +1,4 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/C_pp_Study.dir/Cat.cpp.o"
-  "CMakeFiles/C_pp_Study.dir/Cat.cpp.o.d"
-  "CMakeFiles/C_pp_Study.dir/Data.cpp.o"
-  "CMakeFiles/C_pp_Study.dir/Data.cpp.o.d"
-  "CMakeFiles/C_pp_Study.dir/Dog.cpp.o"
-  "CMakeFiles/C_pp_Study.dir/Dog.cpp.o.d"
   "CMakeFiles/C_pp_Study.dir/main.cpp.o"
   "CMakeFiles/C_pp_Study.dir/main.cpp.o.d"
   "C_pp_Study"
