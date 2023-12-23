@@ -1,24 +1,4 @@
 # ninja log v5
-3	264	7238978404817661	CMakeFiles/C_pp_Study.dir/main.cpp.obj	2ea3312a798ea80b
-7	263	7238978404817661	CMakeFiles/C_pp_Study.dir/Dog.cpp.obj	502df62c726203eb
-264	443	7238978406605365	C_pp_Study.exe	2aa9d777dc174bc1
-18	277	7238980789753472	build.ninja	a17dd79e4d1ddae
-8	274	7238979772166626	CMakeFiles/C_pp_Study.dir/Cat.cpp.obj	af7a021a1869ec7d
-6	270	7238980950428583	CMakeFiles/C_pp_Study.dir/Cat.cpp.obj	af7a021a1869ec7d
-10	272	7238980950438578	CMakeFiles/C_pp_Study.dir/Dog.cpp.obj	502df62c726203eb
-2	272	7238980950438578	CMakeFiles/C_pp_Study.dir/main.cpp.obj	2ea3312a798ea80b
-272	372	7238980951423761	C_pp_Study.exe	9208da92a062b4e5
-3	257	7238983812990894	CMakeFiles/C_pp_Study.dir/main.cpp.obj	2ea3312a798ea80b
-258	372	7238983814116041	C_pp_Study.exe	9208da92a062b4e5
-3	283	7238984127929780	CMakeFiles/C_pp_Study.dir/main.cpp.obj	2ea3312a798ea80b
-283	388	7238984128965034	C_pp_Study.exe	9208da92a062b4e5
-3	249	7238984467761133	CMakeFiles/C_pp_Study.dir/main.cpp.obj	2ea3312a798ea80b
-249	345	7238984468701217	C_pp_Study.exe	9208da92a062b4e5
-4	258	7238985982522070	CMakeFiles/C_pp_Study.dir/main.cpp.obj	2ea3312a798ea80b
-258	361	7238985983527266	C_pp_Study.exe	9208da92a062b4e5
-3	256	7238987472139266	CMakeFiles/C_pp_Study.dir/main.cpp.obj	2ea3312a798ea80b
-256	355	7238987473114470	C_pp_Study.exe	9208da92a062b4e5
-3	253	7238987633303854	CMakeFiles/C_pp_Study.dir/main.cpp.obj	2ea3312a798ea80b
-254	352	7238987634259041	C_pp_Study.exe	9208da92a062b4e5
 2	253	7238987796584732	CMakeFiles/C_pp_Study.dir/main.cpp.obj	2ea3312a798ea80b
 253	352	7238987797559859	C_pp_Study.exe	9208da92a062b4e5
+18	277	7250228070134445	build.ninja	a17dd79e4d1ddae
