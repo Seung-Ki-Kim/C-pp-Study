@@ -1,5 +1,9 @@
 #include <iostream>
+#include <thread>
+#include <vector>
+
 using namespace std;
+std::vector<thread> my_threads;
 
 class Vector {
 private:
@@ -7,81 +11,63 @@ private:
     int sz;
 public:
     Vector();
-    Vector(int s);
+    Vector(int sz);
 
-    Vector(const Vector& a);    // 복사 생성자
-    Vector& operator=(const Vector& a); // 복사 대입
+    Vector(const Vector& copyVector);
+    Vector& operator=(const Vector& copyVector);
 
-    Vector(Vector&& a); // 이동 생성자
-    Vector& operator=(Vector&& a);  // 이동 대입
+    Vector(Vector&& moveVector);
+    Vector& operator=(Vector&& moveVector);
 
     double& operator[](int i);
     const double& operator[](int i) const;
 
     int size() const;
 
-    ~Vector() { delete[] elem; }
+    ~Vector() {
+        delete[] elem;
+    };
 };
 
-Vector::Vector(const Vector &a) : elem{new double[a.sz]}, sz{a.sz} {
-    for (int i = 0; i != sz; ++i) {
-        elem[i] = a.elem[i];
+Vector::Vector(const Vector& copyVector) {  // 복사 생성자
+    elem = new double[copyVector.sz];
+    sz = copyVector.sz;
+
+    for (int i = 0; i != sz; i++) {
+        elem[i] = copyVector[i];
     }
 }
 
-Vector::Vector(Vector &&a) : elem{a.elem}, sz{a.sz} {
-    a.elem = nullptr;
-    a.sz = 0;
-}
+Vector& Vector::operator=(const Vector& copyVector) {   // 복사 대입 연산자
+    double* p = new double[copyVector.sz];
 
-Vector& Vector::operator=(const Vector &a) {
-    double* p = new double[a.sz];
-
-    for (int i = 0; i != a.sz; ++i) {
-        p[i] = a.elem[i];
+    for (int i = 0; i != copyVector.sz; i++) {
+        p[i] = copyVector.elem[i];
     }
 
-    delete[] Vector::elem;
+    delete[] elem;
 
-    Vector::elem = p;
-    Vector::sz = a.sz;
+    elem = p;
+    sz = copyVector.sz;
 
     return *this;
 }
 
-Vector operator+(const Vector& a, const Vector& b) {
-    if (a.size() != b.size()) {
-        throw;
+Vector init(int n) {
+    thread t = heartbeat;
+    my_threads.push_back(std::move(t));
+
+    Vector vec(n);
+
+    for (int i = 0; i != vec.size(); i++) {
+        vec[i] = 777;
     }
 
-    Vector res(a.size());
-
-    for (int i = 0; i != a.size(); i++) {
-        res[i] = a[i] + b[i];
-    }
-
-    return res;
+    return vec;
 }
-
-void f(const Vector& x, const Vector& y, const Vector& z) {
-    Vector r;
-
-    r = x + y + z;
-}
-
-Vector f() {
-    Vector x(1000);
-    Vector y(2000);
-    Vector z(3000);
-
-    z = x;
-    y = std::move(x);
-
-    return z;
-}
-
-
 
 int main() {
+    auto v = init(1000000);
+
     return 0;
 }
