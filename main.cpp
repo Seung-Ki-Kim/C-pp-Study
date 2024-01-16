@@ -1,87 +1,57 @@
 #include <iostream>
+#include <list>
 using namespace std;
 
+template<typename T>
 class Vector {
 private:
-    double* elem;
+    T* elem;
     int sz;
 public:
-    Vector();
-    Vector(int s);
+    explicit Vector(int s);
+    T& operator[](int i);
+    const T& operator[](int i) const;
 
-    Vector(const Vector& a);    // 복사 생성자
-    Vector& operator=(const Vector& a); // 복사 대입
+    int size() const {
+        return sz;
+    }
 
-    Vector(Vector&& a); // 이동 생성자
-    Vector& operator=(Vector&& a);  // 이동 대입
-
-    double& operator[](int i);
-    const double& operator[](int i) const;
-
-    int size() const;
-
-    ~Vector() { delete[] elem; }
+    ~Vector() {
+        delete[] elem;
+    }
 };
 
-Vector::Vector(const Vector &a) : elem{new double[a.sz]}, sz{a.sz} {
-    for (int i = 0; i != sz; ++i) {
-        elem[i] = a.elem[i];
-    }
-}
-
-Vector::Vector(Vector &&a) : elem{a.elem}, sz{a.sz} {
-    a.elem = nullptr;
-    a.sz = 0;
-}
-
-Vector& Vector::operator=(const Vector &a) {
-    double* p = new double[a.sz];
-
-    for (int i = 0; i != a.sz; ++i) {
-        p[i] = a.elem[i];
-    }
-
-    delete[] Vector::elem;
-
-    Vector::elem = p;
-    Vector::sz = a.sz;
-
-    return *this;
-}
-
-Vector operator+(const Vector& a, const Vector& b) {
-    if (a.size() != b.size()) {
+template<typename T>
+Vector<T>::Vector(int s) {
+    if (s < 0){
         throw;
     }
 
-    Vector res(a.size());
+    elem = new T[s];
+    sz = s;
+}
 
-    for (int i = 0; i != a.size(); i++) {
-        res[i] = a[i] + b[i];
+template<typename T>
+const T& Vector<T>::operator[](int i) const {
+    if (i < 0 || size() <= i) {
+        throw out_of_range("Vector::operator[]");
     }
 
-    return res;
+    return elem[i];
 }
 
-void f(const Vector& x, const Vector& y, const Vector& z) {
-    Vector r;
-
-    r = x + y + z;
-}
-
-Vector f() {
-    Vector x(1000);
-    Vector y(2000);
-    Vector z(3000);
-
-    z = x;
-    y = std::move(x);
-
-    return z;
+void f(const Vector<string>& vectorStr) {
+    for (int i = 0; i != vectorStr.size(); i++) {
+        cout << vectorStr[i] << endl;
+    }
 }
 
 
 
 int main() {
+    Vector<char> vectorChar(200);
+    Vector<int> vectorInt(300);
+    Vector<list<int>> vectorListInt(400);
+
     return 0;
 }
