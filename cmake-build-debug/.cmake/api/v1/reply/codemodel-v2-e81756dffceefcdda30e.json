@@ -6,7 +6,7 @@
 			[
 				{
 					"build" : ".",
-					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.26"
@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "C_pp_Study::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-C_pp_Study-Debug-8148cc0ef422d00da128.json",
+					"jsonFile" : "target-C_pp_Study-Debug-d3976b0ed0c9686208c1.json",
 					"name" : "C_pp_Study",
 					"projectIndex" : 0
 				}
@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/Users/araina/Documents/Programming-Study/C_pp_Study/cmake-build-debug",
-		"source" : "/Users/araina/Documents/Programming-Study/C_pp_Study"
+		"build" : "D:/Programming-Study/C_pp_Study/cmake-build-debug",
+		"source" : "D:/Programming-Study/C_pp_Study"
 	},
 	"version" : 
 	{
