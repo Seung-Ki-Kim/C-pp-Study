@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "D:/Programming-Study/C_pp_Study/cmake-build-debug",
-		"source" : "D:/Programming-Study/C_pp_Study"
+		"build" : "D:/Github/wlvlrtm/C-pp-Study/cmake-build-debug",
+		"source" : "D:/Github/wlvlrtm/C-pp-Study"
 	},
 	"version" : 
 	{
