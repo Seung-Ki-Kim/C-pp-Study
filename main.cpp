@@ -2,28 +2,19 @@
 using namespace std;
 
 
-void bot(int mode, string name) {
-    switch (mode) {
-        case 1:
-            cout << "Welcome, " << name << "!" << endl;
-            break;
-        case 2:
-            cout << "Goodbye, " << name << "!" << endl;
-            break;
-        default:
-            cout << "Try again" << endl;
-            break;
-    }
+int toSeconds(int days) {
+   int hours = days * 24;
+   int minutes = hours * 60;
+   int seconds = minutes * 60;
+
+   return seconds;
 }
 
 int main() {
-    int mode;
-    string name;
+    int days;
 
-    cin >> mode;
-    cin >> name;
-
-    bot(mode, name);
+    cin >> days;
+    cout << toSeconds(days) << endl;
 
     return 0;
 }
