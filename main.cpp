@@ -1,13 +1,29 @@
 #include <iostream>
-#include <list>
 using namespace std;
 
 
-int main() {
-    int a = 4;
-    int b = 5;
+void bot(int mode, string name) {
+    switch (mode) {
+        case 1:
+            cout << "Welcome, " << name << endl;
+            break;
+        case 2:
+            cout << "Goodbye, " << name << endl;
+            break;
+        default:
+            cout << "Try again" << endl;
+            break;
+    }
+}
 
-    cout << a + b;
+int main() {
+    int mode;
+    string name;
+
+    cin >> mode;
+    cin >> name;
+
+    bot(mode, name);
 
     return 0;
 }
