@@ -5,10 +5,10 @@ using namespace std;
 void bot(int mode, string name) {
     switch (mode) {
         case 1:
-            cout << "Welcome, " << name << endl;
+            cout << "Welcome, " << name << "!" << endl;
             break;
         case 2:
-            cout << "Goodbye, " << name << endl;
+            cout << "Goodbye, " << name << "!" << endl;
             break;
         default:
             cout << "Try again" << endl;
