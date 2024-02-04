@@ -1,4 +1,5 @@
 #include <iostream>
+<<<<<<< Updated upstream
 using namespace std;
 
 
@@ -16,5 +17,15 @@ int main() {
     cin >> days;
     cout << toSeconds(days) << endl;
 
+=======
+#include "MyClass.h"
+using namespace std;
+
+
+int main() {
+    MyClass obj(3, 5);
+    obj.myPrint();
+    
+>>>>>>> Stashed changes
     return 0;
 }
