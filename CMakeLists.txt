@@ -5,6 +5,4 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_executable(C_pp_Study main.cpp
         main.cpp
-        MyClass.cpp
-        MyClass.h
 )

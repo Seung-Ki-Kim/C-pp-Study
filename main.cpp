@@ -1,31 +1,38 @@
 #include <iostream>
-<<<<<<< Updated upstream
 using namespace std;
 
+class Mother {
+public:
+    Mother();
+    ~Mother();
+};
 
-int toSeconds(int days) {
-   int hours = days * 24;
-   int minutes = hours * 60;
-   int seconds = minutes * 60;
-
-   return seconds;
+Mother::Mother() {
+    cout << "Mother's Constructor" << endl;
 }
 
+Mother::~Mother() {
+    cout << "Mother's Destructor" << endl;
+}
+
+
+class Daughter : public Mother {
+public:
+    Daughter();
+    ~Daughter();
+};
+
+Daughter::Daughter() {
+    cout << "Daughter's Constructor" << endl;
+}
+
+Daughter::~Daughter() {
+    cout << "Daughter's Destructor" << endl;
+}
+
+
 int main() {
-    int days;
-
-    cin >> days;
-    cout << toSeconds(days) << endl;
-
-=======
-#include "MyClass.h"
-using namespace std;
-
-
-int main() {
-    MyClass obj(3, 5);
-    obj.myPrint();
-    
->>>>>>> Stashed changes
+    Mother m;
+    Daughter d;
     return 0;
 }
