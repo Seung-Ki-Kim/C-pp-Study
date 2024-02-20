@@ -1,48 +1,31 @@
 #include <iostream>
 using namespace std;
 
-
-class Enemy {
-protected:
-    int attackPower;
+template <class T>
+class Div {
 public:
-    virtual void attack() {}
-    void setAttackPower(int value) {
-        attackPower = value;
+    Div(T x, T y) {
+        cout << (x / y) << endl;
+    }
+};
+
+// your code goes here
+template <>
+class Div<string> {
+public:
+    Div(string x, string y) {
+        cout << (x.length() / y.length()) << endl;
     }
 };
 
 
-class Ninja : public Enemy {
-public:
-    void attack() {
-        cout << "Ninja Attack : " << attackPower << endl;
-    }
-};
+int main () {
+    int x, y;
+    string a, b;
 
-class Monster : public Enemy {
-public:
-    void attack() {
-        cout << "Monster Attack : " << attackPower << endl;
-    }
-};
+    cin >> a >> b;
+    cin >> x >> y;
 
-
-int main() {
-    Ninja n;
-    Monster m;
-
-    Enemy *e1 = &n;
-    Enemy *e2 = &m;
-
-    e1 -> setAttackPower(5);
-    e2 -> setAttackPower(10);
-
-    n.attack();
-    m.attack();
-
-    e1 -> attack();
-    e2 -> attack();
-
-    return 0;
+    Div <int> d1(x, y);
+    Div <string> d2(a, b);
 }
