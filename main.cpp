@@ -1,31 +1,39 @@
 #include <iostream>
 using namespace std;
 
-template <class T>
-class Div {
-public:
-    Div(T x, T y) {
-        cout << (x / y) << endl;
-    }
+struct inflatable {
+    char name[20];
+    float volume;
+    double price;
 };
 
-// your code goes here
-template <>
-class Div<string> {
-public:
-    Div(string x, string y) {
-        cout << (x.length() / y.length()) << endl;
-    }
+struct perks {
+    int key_number;
+    char car[12];
+} mr_smith = {
+        7,
+        "Packard"
 };
 
 
 int main () {
-    int x, y;
-    string a, b;
-
-    cin >> a >> b;
-    cin >> x >> y;
-
-    Div <int> d1(x, y);
-    Div <string> d2(a, b);
+    inflatable guest = {
+            "Glorious Gloria",
+            1.88,
+            29.99
+    };
+    
+    inflatable pal = guest;
+    
+    struct {
+        int x;
+        int y;
+    } position;
+    
+    cout << "Expand your guest list with " << guest.name;
+    cout << " and " << pal.name << "!\n";
+    cout << "You can have both for $";
+    cout << guest.price + pal.price << "!\n";
+    
+    return 0;
 }
