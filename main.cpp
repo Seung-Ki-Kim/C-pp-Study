@@ -2,15 +2,18 @@
 using namespace std;
 
 int main() {
-    int nights = 1001;
-    int* pn = &nights;
-
-    int* pt = new int;
-    *pt = 1001;
-
-    cout << "pn : " << *pn << endl;
-    cout << "pt : " << *pt << endl;
-
+    int* ps = new int;
+    int* pq = ps;
+    
+    *ps = 3;
+    
+    cout << &ps << endl;
+    cout << &pq << endl;
+    
+    delete pq;
+    
+    cout << &ps << endl;
+    cout << &pq << endl;
 
     return 0;
 }
