@@ -1,21 +1,30 @@
 #include <iostream>
+#include <cstring>
 using namespace std;
 
+char* getname(void);
+
 int main() {
-    double wages[3] = {1.0, 2.0, 3.0};
-    short stacks[3] = {3, 2, 1};
+    char* name;
+    name = getname();
+    cout << name << " at " << (int*) name << "\n";
+    delete[] name;
     
-    double* pWages = wages;
-    short* pStacks = stacks;
+    name = getname();
+    cout << name << " at " << (int*) name << "\n";
+    delete[] name;
     
-    cout << "pWages: " << *pWages << endl;
-    cout << "pStacks: " << *pStacks << endl;
-
-    pWages += 1;
-    pStacks += 1;
-    
-    cout << "pWages: " << *pWages << endl;
-    cout << "pStacks: " << *pStacks << endl;
-
     return 0;
+}
+
+char* getname() {
+    char temp[80];
+    
+    cout << "Enter last name: ";
+    cin >> temp;
+    
+    char* pn = new char[strlen(temp) + 1];
+    strcpy(pn, temp);
+    
+    return pn;
 }
