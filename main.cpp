@@ -1,30 +1,26 @@
 #include <iostream>
-#include <cstring>
+#include <vector>
+#include <array>
 using namespace std;
 
-struct antarctica_years_end {
-    int year;
-};
-
 int main() {
-    antarctica_years_end s01, s02, s03;
-    s01.year = 1998;
+    double a1[4] = {1.1, 2.2, 3.3, 4.4};
 
-    antarctica_years_end* pa = &s02;
-    pa->year = 1999;
+    vector<double> a2(4);
+    a2[0] = 1.0;
+    a2[1] = 2.0;
+    a2[2] = 3.0;
+    a2[3] = 4.0;
 
-    antarctica_years_end trio[3];
-    trio[0].year = 2003;
+    array<double, 4> a3 = {1.1, 2.1, 3.1, 4.1};
 
-    cout << trio->year << endl;
+    array<double, 4> a4;
+    a4 = a3;
 
-    const antarctica_years_end* arp[3] = {&s01, &s02, &s03};
-    cout << arp[1]->year << endl;
-
-    const antarctica_years_end** ppa = arp;
-    auto ppb = arp;
-    cout << (*ppa)->year << endl;
-    cout << (*(ppb+1))->year << endl;
+    cout << a1[0] << endl;
+    cout << a2[1] << endl;
+    cout << a3[2] << endl;
+    cout << a4[3] << endl;
 
 
     return 0;
