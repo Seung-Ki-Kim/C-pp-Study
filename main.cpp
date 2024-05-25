@@ -2,29 +2,30 @@
 #include <cstring>
 using namespace std;
 
-char* getname(void);
+struct antarctica_years_end {
+    int year;
+};
 
 int main() {
-    char* name;
-    name = getname();
-    cout << name << " at " << (int*) name << "\n";
-    delete[] name;
-    
-    name = getname();
-    cout << name << " at " << (int*) name << "\n";
-    delete[] name;
-    
-    return 0;
-}
+    antarctica_years_end s01, s02, s03;
+    s01.year = 1998;
 
-char* getname() {
-    char temp[80];
-    
-    cout << "Enter last name: ";
-    cin >> temp;
-    
-    char* pn = new char[strlen(temp) + 1];
-    strcpy(pn, temp);
-    
-    return pn;
+    antarctica_years_end* pa = &s02;
+    pa->year = 1999;
+
+    antarctica_years_end trio[3];
+    trio[0].year = 2003;
+
+    cout << trio->year << endl;
+
+    const antarctica_years_end* arp[3] = {&s01, &s02, &s03};
+    cout << arp[1]->year << endl;
+
+    const antarctica_years_end** ppa = arp;
+    auto ppb = arp;
+    cout << (*ppa)->year << endl;
+    cout << (*(ppb+1))->year << endl;
+
+
+    return 0;
 }
