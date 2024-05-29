@@ -1,5 +1,4 @@
 #include <iostream>
-#include <string>
 using namespace std;
 
 void blind_mice(int count) {
