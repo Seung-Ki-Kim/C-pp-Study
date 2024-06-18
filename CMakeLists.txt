@@ -43,3 +43,8 @@ add_executable(src_ch5_9 src/ch5_9.cpp)
 add_executable(src_ch5_10 src/ch5_10.cpp)
 
 add_executable(src_ch6_1 src/ch6_1.cpp)
+add_executable(src_ch6_2 src/ch6_2.cpp)
+
+add_executable(src_ch6_3 src/ch6_3.cpp)
+add_executable(src_ch6_4 src/ch6_4.cpp)
+add_executable(src_ch6_5 src/ch6_5.cpp)

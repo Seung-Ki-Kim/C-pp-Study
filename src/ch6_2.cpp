@@ -5,7 +5,7 @@ int main() {
 	double arr[10];
 	double avg = 0;
 	double overNum = 0;
-	bool isbreaked = false;
+	bool isBroken = false;
 
 	for (int i = 0; i < sizeof(arr) / sizeof(double); i++) {
 		cout << i << ": ";
@@ -13,7 +13,7 @@ int main() {
 	
 		if (cin.fail()) {
 			cin.clear();
-			isbreaked = true;
+            isBroken = true;
 
 			break;
 		}
@@ -22,8 +22,7 @@ int main() {
 		}
 	}
 	
-	if (!isbreaked) {
-
+	if (!isBroken) {
 		avg /= sizeof(arr) / sizeof(double);
 	
 		for (int i = 0; i < sizeof(arr) / sizeof(double); i++) {
