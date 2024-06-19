@@ -13,8 +13,34 @@ The loop should terminate when the user enters a negative number or non-numeric 
 using namespace std;
 
 int main() {
+    float tyarps;
+    float result = 0;
+
+    float values[3] = {5000, 10000, 20000};
+    float percents[3] = {0.00, 0.10, 0.15};
+
+    cout << "Input tyarps: ";
+    cin >> tyarps;
 
 
-    
+    if (tyarps >= 35000) {
+        for (int i = 0; i < sizeof(values) / sizeof(float); ++i) {
+            result += values[i] * percents[i];
+        }
+
+        result += (tyarps - 35000) * 0.20;
+    }
+    else {
+        int i = 0;
+
+        while (tyarps > 0) {
+            tyarps -= values[i];
+            result += values[i] * percents[i];
+            i += 1;
+        }
+    }
+
+    cout << result << endl;
+
     return 0;
 }
