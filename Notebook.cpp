@@ -1,40 +1,30 @@
 #include <cstdio>
 
-struct ClockOfTheLongNow {
-	int year = 2019;
+void power_up_rat_thing(int nuclear_isotopes) {
+	static thread_local int rat_things_power = 200;	
+	const auto waste_heat = rat_things_power * 20;
 
-	int get_year() const {
-		return year;
+	rat_things_power = rat_things_power + nuclear_isotopes;
+
+	if (waste_heat > 10000) {
+		printf("Warning! Hot doggie!\n");
 	}
-	
-	bool is_leap_year(const ClockOfTheLongNow& clock) {
-		if (clock.get_year() % 4 > 0) {
-			return false;
-		}
 
-		return true;
-	}
-};
+	printf("Rat_thing power: %d\n", rat_things_power);
+}
 
-struct Avout {
-	ClockOfTheLongNow apert;
-	const char* name;
-	
-
-	Avout(const char* name, long year_of_apert) : 
-		name{ name }, apert{ year_of_apert } {}
-
-	void announce() const {
-		printf("%s %d\n", name, apert.get_year());
-	}
-};
 
 int main() {
-	Avout raz { "Erasmas", 3010 };
-	Avout jad { "Jad", 4090 };
+	power_up_rat_thing(100);
+	power_up_rat_thing(100000);
 
-	raz.announce();
-	jad.announce();
+	int* my_int_ptr = new int{42};
+	printf("%d\n", *my_int_ptr);
+	*my_int_ptr = 30;
+	printf("%d\n", *my_int_ptr);
+	
+	delete my_int_ptr;
+
 
 	return 0;
 }
