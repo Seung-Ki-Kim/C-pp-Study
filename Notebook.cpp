@@ -9,13 +9,21 @@ private:
     size_t length;
 
 public:
-    SimpleString(size_t max_size) : max_size { max_size }, length {} {
+    SimpleString(size_t max_size):
+    max_size { max_size }, length {} {
         if (max_size == 0) {
             throw std::runtime_error { "Max size must be at lease 1." };
         }
 
         buffer = new char[max_size];
         buffer[0] = 0;
+    }
+
+    SimpleString(SimpleString&& other) noexcept:
+    max_size { other.max_size }, buffer(other.buffer), length(other.length) {
+        other.max_size = 0;
+        other.buffer = nullptr;
+        other.length = 0;
     }
 
     SimpleString& operator = (const SimpleString& other) {
@@ -30,6 +38,22 @@ public:
 
         std::strncpy(buffer, other.buffer,max_size);
         buffer[max_size - 1] = '\0';
+
+        return *this;
+    }
+
+    SimpleString& operator = (SimpleString&& other) noexcept {
+        if (this == &other) { return *this; }
+
+        delete[] buffer;
+
+        buffer = other.buffer;
+        length = other.length;
+        max_size = other.max_size;
+
+        other.buffer = nullptr;
+        other.length = 0;
+        other.max_size = 0;
 
         return *this;
     }
@@ -64,20 +88,24 @@ private:
     SimpleString string;
 
 public:
-    SimpleStringOwner(const SimpleString& my_string) : string{ my_string } {
+    SimpleStringOwner(SimpleString&& x) :
+    string {std::move(x)} {
     }
 };
 
-void own_a_string() {
-    SimpleString a { 50 };
-    a.append_line("We apologize for the");
-    a.append_line("inconvenience.");
-
-    SimpleString b { a };
-}
 
 int main() {
+    SimpleString a { 50 };
+    a.append_line("We apologize for the");
 
+    SimpleString b { 50 };
+    b.append_line("Last message");
+
+    a.print("a");
+    b.print("b");
+
+    b = std::move(a);
+    b.print("b");
 
 	return 0;
 }
