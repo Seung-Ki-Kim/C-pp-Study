@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_executable(C_pp_Study
         Notebook.cpp
+        BankLogger.cpp
         ch1.cpp
         ch2.cpp
         ch3_2.cpp
