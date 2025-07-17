@@ -4,8 +4,10 @@ project(C_pp_Study)
 set(CMAKE_CXX_STANDARD 14)
 
 add_executable(C_pp_Study
+        Notebook.cpp
         ch1.cpp
         ch2.cpp
-        ch3-2.cpp
-        ch3-3.cpp
-        Notebook.cpp)
+        ch3_2.cpp
+        ch3_3.cpp
+        ch4.cpp
+)
