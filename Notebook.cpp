@@ -1,30 +1,28 @@
 # include <cstdio>
 
-struct Logger {
-    virtual ~Logger() = default;
-    virtual void log_transfer(long from, long to, double amount) = 0;
+struct BaseClass {
+	virtual ~BaseClass() = default;
 };
 
-struct ConsoleLogger : Logger {
-    void log_transfer(long from, long to, double amount) override {
-        printf("%ld -> %ld: %f\n", from, to, amount);
-    }
-};
+struct DerivedClass : BaseClass {
+	DerivedClass() {	// Constructor
+		printf("DerivedClass() invoked.\n");
+	}
 
-struct Bank {
-    void make_transfer(long from, long to, double amount) {
-        // snip
-        ConsoleLogger logger;
-        logger.log_transfer(from, to, amount);
-    }
+	~DerivedClass() {
+		printf("~DerivedClass() invoked.\n");
+	}
 };
 
 
 int main() {
-    Bank bank;
+	printf("Constructing DerivedClass x. \n");
 
-    bank.make_transfer(1000, 2000, 50);
-    bank.make_transfer(2000, 4000, 20);
+	BaseClass* x { new DerivedClass{} };
+	
+	printf("Deleting x as a BaseClass*.\n");
 
-    return 0;
+	delete x;
+
+	return 0;
 }
