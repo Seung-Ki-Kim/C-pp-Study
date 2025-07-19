@@ -1,28 +1,41 @@
 # include <cstdio>
+# include <cstring>
 
-struct BaseClass {
-	virtual ~BaseClass() = default;
-};
 
-struct DerivedClass : BaseClass {
-	DerivedClass() {	// Constructor
-		printf("DerivedClass() invoked.\n");
-	}
+void carbon_thaw(const int& encased_solo) {
+	// encased_solo++;
+	auto& hibernation_sick_solo = const_cast<int&>(encased_solo);
+	hibernation_sick_solo++;
+}
 
-	~DerivedClass() {
-		printf("~DerivedClass() invoked.\n");
-	}
-};
+short increment_as_short(void* target) {
+	auto as_short = static_cast<short*>(target);
+	*as_short += 1;
+	
+	return *as_short;
+}
 
 
 int main() {
-	printf("Constructing DerivedClass x. \n");
+	int i = 10;
+	int* i_ptr = &i;
 
-	BaseClass* x { new DerivedClass{} };
+	carbon_thaw(*i_ptr);
+	printf("%d\n", *i_ptr);
+
+	short beast { 665 };
+	auto mark_of_the_beast = increment_as_short(&beast);
+
+	printf("%d\n", mark_of_the_beast);
 	
-	printf("Deleting x as a BaseClass*.\n");
+	char text[] = "A";
+	void* t;
+	
+	t = text;
 
-	delete x;
+	auto v = static_cast<int*>(t);
+	
+	printf("%d\n", *v);
 
 	return 0;
 }
