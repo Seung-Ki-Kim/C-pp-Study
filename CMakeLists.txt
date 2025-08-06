@@ -1,16 +1,6 @@
-cmake_minimum_required(VERSION 3.28)
+cmake_minimum_required(VERSION 4.0)
 project(C_pp_Study)
 
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_STANDARD 23)
 
-add_executable(C_pp_Study
-        Notebook.cpp
-        BankLogger.cpp
-        ch1.cpp
-        ch2.cpp
-        ch3_2.cpp
-        ch3_3.cpp
-        ch4.cpp
-        ch5.cpp
-)
+add_executable(C_pp_Study main.cpp)
