@@ -1,5 +1,7 @@
+#include <cstdio>
 #include <cstddef>
-#include <iostream>
+#include <new>
+#include <vector>
 
 struct LargeBucket {
     static constexpr size_t SIZE = 1024 * 1024;
