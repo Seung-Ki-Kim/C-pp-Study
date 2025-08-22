@@ -1,62 +1,114 @@
-#include <cstdio>
-#include <cstdint>
-
-constexpr char pos_A{ 65 };
-constexpr char pos_Z{ 90 };
-constexpr char pos_a{ 97 };
-constexpr char pos_z{ 122 };
+#include <stdexcept>
+#include <functional>
+#include <exception>
 
 
-constexpr bool within_AZ(char x) {
-    return (pos_A <= x && pos_Z >= x);
-}
-
-constexpr bool within_az(char x) {
-    return (pos_a <= x && pos_z >= x);
-}
-
-struct AlphaHistogram {
-    void ingest(const char* x);
-    void print() const;
-private:
-    size_t counts[26]{};
+struct SpeedUpdate {
+    double velocity_mps;
 };
 
-void AlphaHistogram::ingest(const char *x) {
-    size_t index{};
+struct CarDetected {
+    double distance_m;
+    double velocity_mps;
+};
 
-    while (const auto c = x[index]) {
-        if (within_AZ(c)) {
-            counts[c-pos_A]++;
-        }
-        else if (within_az(c)) {
-            counts[c-pos_a]++;
+struct BrakeCommand {
+    double time_to_collision_s;
+};
+
+struct ServiceBus {
+    void publish(const BrakeCommand&);
+};
+
+template <typename T>
+struct AutoBrake {
+    AutoBrake(const T& publish) : speed_mps{}, collision_threshold_s{ 5 }, publish{ publish } {}
+
+    void observe(const SpeedUpdate& cd) {
+        speed_mps = cd.velocity_mps;
+    }
+    void observe(const CarDetected& cd) {}
+
+    void set_collision_threshold_s(double x) {
+        if (x < 1) {
+            throw std::invalid_argument{ "Collision less than 1." };
         }
 
-        index++;
+        collision_threshold_s = x;
+    }
+
+    double get_collision_threshold_s() const {
+        return collision_threshold_s;
+    }
+
+    double get_speed_mps() const {
+        return speed_mps;
+    }
+
+private:
+    double collision_threshold_s;
+    double speed_mps;
+    const T& publish;
+};
+
+constexpr void assert_that(bool statement, const char* message) {
+    if (!statement) {
+        throw std::runtime_error{ message };
     }
 }
 
-void AlphaHistogram::print() const {
-    for (auto index{ pos_A }; index <= pos_Z; index++) {
-        printf("%c: ", index);
+void initial_speed_is_zero() {
+    AutoBrake<std::function<void(const BrakeCommand&)>> auto_brake{ [](const BrakeCommand&) {} };
+    assert_that(auto_brake.get_speed_mps() == 0L, "speed not equal 0");
+}
 
-        auto n_asterisks = counts[index - pos_A];
+void sensitivity_greater_than_1() {
+    AutoBrake<std::function<void(const BrakeCommand&)>> auto_brake{ [](const BrakeCommand&) {} };
 
-        while (n_asterisks--) {
-            printf("*");
-        }
+    try {
+        auto_brake.set_collision_threshold_s(0.5L);
+    } catch (const std::exception&) {
+        return;
+    }
 
-        printf("\n");
+    assert_that(false, "no exception thrown");
+}
+
+void initial_sensitivity_is_five() {
+    AutoBrake<std::function<void(const BrakeCommand&)>> auto_brake{ [](const BrakeCommand&){} };
+    assert_that(auto_brake.get_collision_threshold_s() == 5L, "sensitivity is not 5");
+}
+
+void run_test(void(*unit_test)(), const char* name) {
+    try {
+        unit_test();
+        printf("[+] Test %s successful.\n", name);
+    } catch (const std::exception& e) {
+        printf("[-] Test failure in %s. %s\n", name, e.what());
     }
 }
 
-int main(int argc, char** argv) {
-    AlphaHistogram hist;
+void speed_is_saved() {
+    AutoBrake<std::function<void(const BrakeCommand&)>> auto_brake { [](const BrakeCommand&) {} };
 
-    for (size_t i{ 1 }; i < argc; i++) {
-        hist.ingest(argv[i]);
-    }
+    auto_brake.observe(SpeedUpdate{100L });
+    assert_that(100L == auto_brake.get_speed_mps(), "speed not saved to 100");
 
-    hist.print();
+    auto_brake.observe(SpeedUpdate{ 50L });
+    assert_that(50L == auto_brake.get_speed_mps(), "speed not saved to 50");
+
+    auto_brake.observe(SpeedUpdate{ 0L });
+    assert_that(0L == auto_brake.get_speed_mps(), "speed not saved to 0");
+}
+
+int main() {
+    run_test(initial_speed_is_zero, "initial speed is 0.");
+    run_test(initial_sensitivity_is_five, "initial sensitivity is 5.");
+    run_test(sensitivity_greater_than_1, "sensitivity greater than 1.");
+    run_test(speed_is_saved, "speed is saved");
+
+
+
+
+    return 0;
 }
