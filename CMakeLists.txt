@@ -11,7 +11,6 @@ add_executable(C_pp_Study
         main.cpp
         AutoBrake.cpp
         DeadMenOfDunharrow.cpp
-        AutoBrake.cpp
 )
 
 # Catch2 라이브러리를 실행 파일에 연결합니다.

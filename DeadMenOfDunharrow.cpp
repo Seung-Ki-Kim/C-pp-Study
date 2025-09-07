@@ -23,7 +23,7 @@ using ScopedOathbreakers = std::unique_ptr<DeadMenOfDunharrow>;
 
 TEST_CASE("UniquePtr evaluates to") {
     SECTION("True when full") {
-        ScopedOathbreakers aragorn { new DeadMenOfDunharrow{} };
+        ScopedOathbreakers aragorn { new DeadMenOfDunharrow {} };
         REQUIRE(aragorn);
     }
 
@@ -36,11 +36,11 @@ TEST_CASE("UniquePtr evaluates to") {
 TEST_CASE("ScopedPtr is an RAII Wrapper.") {
     REQUIRE(DeadMenOfDunharrow::oaths_to_fulfill == 0);
 
-    ScopedOathbreakers aragorn { new DeadMenOfDunharrow{} };
+    ScopedOathbreakers aragorn { new DeadMenOfDunharrow {} };
     REQUIRE(DeadMenOfDunharrow::oaths_to_fulfill == 1);
 
     {
-        ScopedOathbreakers legolas { new DeadMenOfDunharrow{} };
+        ScopedOathbreakers legolas { new DeadMenOfDunharrow {} };
         REQUIRE(DeadMenOfDunharrow::oaths_to_fulfill == 2);
     }
 
@@ -49,7 +49,7 @@ TEST_CASE("ScopedPtr is an RAII Wrapper.") {
 
 TEST_CASE("ScopedPtr supports pointer semantics, like") {
     auto message = "The way is shut";
-    ScopedOathbreakers aragorn { new DeadMenOfDunharrow{ message } };
+    ScopedOathbreakers aragorn { new DeadMenOfDunharrow { message } };
 
     SECTION("operator*") {
         REQUIRE((*aragorn).message == message);
@@ -71,7 +71,7 @@ TEST_CASE("ScopedPtr supports comparison with nullptr") {
     }
 
     SECTION("operator!=") {
-        ScopedOathbreakers aragorn{ new DeadMenOfDunharrow{} };
+        ScopedOathbreakers aragorn { new DeadMenOfDunharrow{} };
         REQUIRE(aragorn != nullptr);
     }
 }
@@ -81,11 +81,11 @@ TEST_CASE("ScopedPtr supports swap") {
     auto message2 = "Until the time comes.";
 
     ScopedOathbreakers aragorn {
-        new DeadMenOfDunharrow{ message1 }
+        new DeadMenOfDunharrow { message1 }
     };
 
     ScopedOathbreakers legolas {
-        new DeadMenOfDunharrow{ message2 }
+        new DeadMenOfDunharrow { message2 }
     };
 
     aragorn.swap(legolas);
@@ -94,7 +94,7 @@ TEST_CASE("ScopedPtr supports swap") {
 }
 
 TEST_CASE("ScopedPtr reset") {
-    ScopedOathbreakers aragorn{ new DeadMenOfDunharrow{} };
+    ScopedOathbreakers aragorn{ new DeadMenOfDunharrow {} };
 
     SECTION("destructs owned object.") {
         aragorn.reset();
@@ -103,7 +103,7 @@ TEST_CASE("ScopedPtr reset") {
 
     SECTION("can replace an owned object.") {
         auto message = "It was made by those who are Dead.";
-        auto new_dead_man = new DeadMenOfDunharrow{ message };
+        auto new_dead_man = new DeadMenOfDunharrow { message };
 
         REQUIRE(DeadMenOfDunharrow::oaths_to_fulfill == 2);
         aragorn.reset(new_dead_man);
@@ -118,19 +118,42 @@ void by_ref(const ScopedOathbreakers&) { }
 void by_val(ScopedOathbreakers) { }
 
 TEST_CASE("ScopedPtr can") {
-    ScopedOathbreakers aragorn{ new DeadMenOfDunharrow };
+    ScopedOathbreakers aragorn { new DeadMenOfDunharrow };
 
     SECTION("be passed by reference") {
         by_ref(aragorn);
     }
-
-//    SECTION("not be copied") {
-//        by_val(aragorn);
-//        auto son_of_arathorn = aragorn;
-//    }
-
+    
     SECTION("can be moved") {   // unique_ptr
         by_val(std::move(aragorn));
         auto son_of_arathorn = std::move(aragorn);
+    }
+}
+
+using SharedOathbreakers = std::shared_ptr<DeadMenOfDunharrow>;
+
+TEST_CASE("SharedPtr can be used in copy") {
+    auto aragorn = std::make_shared<DeadMenOfDunharrow>();
+
+    SECTION("construction") {
+        auto son_of_arathorn { aragorn };   // Copy
+        REQUIRE(DeadMenOfDunharrow::oaths_to_fulfill == 1);
+    }
+
+    SECTION("assignment") {
+        SharedOathbreakers son_of_arathorn;
+        son_of_arathorn = aragorn;
+        REQUIRE(DeadMenOfDunharrow::oaths_to_fulfill == 1);
+    }
+
+    SECTION("assignment, and original gets discarded") {
+        auto son_of_arathorn = std::make_shared<DeadMenOfDunharrow>();
+        REQUIRE(DeadMenOfDunharrow::oaths_to_fulfill == 2);
+        son_of_arathorn = aragorn;
+        REQUIRE(DeadMenOfDunharrow::oaths_to_fulfill == 1);
+    }
+
+    SECTION("Shared Array") {
+        std::shared_ptr<int[]> shr_arr(new int[5]{1, 2, 3, 4, 5});
     }
 }
