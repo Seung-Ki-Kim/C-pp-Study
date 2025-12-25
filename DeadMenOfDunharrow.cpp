@@ -1,6 +1,7 @@
 #define CATCH_CONFIG_MAIN
+#include <iostream>
 #include <catch2/catch_test_macros.hpp>
-#include <catch2/catch_approx.hpp>   // v3
+#include <boost/smart_ptr/scoped_ptr.hpp>
 #include <memory>
 
 
@@ -18,7 +19,19 @@ struct DeadMenOfDunharrow {
 };
 
 int DeadMenOfDunharrow::oaths_to_fulfill{};
-using ScopedOathbreakers = std::unique_ptr<DeadMenOfDunharrow>;
+using ScopedOathbreakers = boost::scoped_ptr<DeadMenOfDunharrow>;
+
+
+TEST_CASE("ScopedPtr evaluates to") {
+    SECTION("True when full") {
+        ScopedOathbreakers aragorn { new DeadMenOfDunharrow {} };
+        REQUIRE(aragorn);
+    }
+    SECTION("False when empty") {
+        ScopedOathbreakers aragorn;
+        REQUIRE_FALSE(aragorn);
+    }
+}
 
 
 TEST_CASE("UniquePtr evaluates to") {
@@ -38,13 +51,16 @@ TEST_CASE("ScopedPtr is an RAII Wrapper.") {
 
     ScopedOathbreakers aragorn { new DeadMenOfDunharrow {} };
     REQUIRE(DeadMenOfDunharrow::oaths_to_fulfill == 1);
+    std::cout << "1" << std::endl;
 
     {
         ScopedOathbreakers legolas { new DeadMenOfDunharrow {} };
         REQUIRE(DeadMenOfDunharrow::oaths_to_fulfill == 2);
+        std::cout << "2" << std::endl;
     }
 
     REQUIRE(DeadMenOfDunharrow::oaths_to_fulfill == 1);
+    std::cout << "1" << std::endl;
 }
 
 TEST_CASE("ScopedPtr supports pointer semantics, like") {
@@ -117,18 +133,18 @@ TEST_CASE("ScopedPtr reset") {
 void by_ref(const ScopedOathbreakers&) { }
 void by_val(ScopedOathbreakers) { }
 
-TEST_CASE("ScopedPtr can") {
-    ScopedOathbreakers aragorn { new DeadMenOfDunharrow };
-
-    SECTION("be passed by reference") {
-        by_ref(aragorn);
-    }
-    
-    SECTION("can be moved") {   // unique_ptr
-        by_val(std::move(aragorn));
-        auto son_of_arathorn = std::move(aragorn);
-    }
-}
+// TEST_CASE("ScopedPtr can") {
+//     ScopedOathbreakers aragorn { new DeadMenOfDunharrow };
+//
+//     SECTION("be passed by reference") {
+//         by_ref(aragorn);
+//     }
+//
+//     SECTION("can be moved") {   // unique_ptr
+//         by_val(std::move(aragorn));
+//         auto son_of_arathorn = std::move(aragorn);
+//     }
+// }
 
 using SharedOathbreakers = std::shared_ptr<DeadMenOfDunharrow>;
 
