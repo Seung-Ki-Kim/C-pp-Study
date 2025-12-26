@@ -2,6 +2,7 @@
 #include <iostream>
 #include <catch2/catch_test_macros.hpp>
 #include <boost/smart_ptr/scoped_ptr.hpp>
+#include <boost/smart_ptr/scoped_array.hpp>
 #include <memory>
 
 
@@ -20,7 +21,6 @@ struct DeadMenOfDunharrow {
 
 int DeadMenOfDunharrow::oaths_to_fulfill{};
 using ScopedOathbreakers = boost::scoped_ptr<DeadMenOfDunharrow>;
-
 
 TEST_CASE("ScopedPtr evaluates to") {
     SECTION("True when full") {
@@ -133,18 +133,33 @@ TEST_CASE("ScopedPtr reset") {
 void by_ref(const ScopedOathbreakers&) { }
 void by_val(ScopedOathbreakers) { }
 
-// TEST_CASE("ScopedPtr can") {
-//     ScopedOathbreakers aragorn { new DeadMenOfDunharrow };
-//
-//     SECTION("be passed by reference") {
-//         by_ref(aragorn);
-//     }
-//
-//     SECTION("can be moved") {   // unique_ptr
-//         by_val(std::move(aragorn));
-//         auto son_of_arathorn = std::move(aragorn);
-//     }
-// }
+TEST_CASE("ScopedPtr can") {
+    ScopedOathbreakers aragorn { new DeadMenOfDunharrow };
+
+    SECTION("be passed by reference") {
+        by_ref(aragorn);
+    }
+
+    // SECTION("not be copied") {
+    //     by_val(aragorn);
+    //     auto son_of_arathorn = aragorn;
+    // }
+
+    // SECTION("not be moved") {
+    //     by_val(std::move(aragorn));
+    //     auto son_of_arathorn = std::move(aragorn);
+    // }
+}
+
+TEST_CASE("ScopedArray supports operator[]") {
+    boost::scoped_array<int> squares { new int[5] { 0, 4, 9, 16, 25 } };
+
+    squares[0] = 1;
+    
+    REQUIRE(squares[0] == 1);
+    REQUIRE(squares[1] == 4);
+    REQUIRE(squares[2] == 9);
+}
 
 using SharedOathbreakers = std::shared_ptr<DeadMenOfDunharrow>;
 
@@ -172,4 +187,42 @@ TEST_CASE("SharedPtr can be used in copy") {
     SECTION("Shared Array") {
         std::shared_ptr<int[]> shr_arr(new int[5]{1, 2, 3, 4, 5});
     }
+}
+
+using UniqueOathbreakers = std::unique_ptr<DeadMenOfDunharrow>;
+
+TEST_CASE("UniquePtr can be used in move") {
+    auto aragorn = std::make_unique<DeadMenOfDunharrow>();
+
+    SECTION("construction") {
+        auto son_of_arathorn { std::move(aragorn) };   // Move
+        REQUIRE(DeadMenOfDunharrow::oaths_to_fulfill == 1);
+    }
+
+    SECTION("assignment") {
+        auto son_of_arathorn = std::make_unique<DeadMenOfDunharrow>();
+        REQUIRE(DeadMenOfDunharrow::oaths_to_fulfill == 2);
+        son_of_arathorn = std::move(aragorn);
+        REQUIRE(DeadMenOfDunharrow::oaths_to_fulfill == 1);
+    }
+}
+
+TEST_CASE("UniquePtr to array supports operator[]") {
+    std::unique_ptr<int[]> squares { new int[5] { 1, 4, 9, 16, 25 } };
+
+    squares[0] = 1;
+
+    REQUIRE(squares[0] == 1);
+    REQUIRE(squares[1] == 4);
+    REQUIRE(squares[2] == 9);
+}
+
+auto my_deleter = [](int* x) {
+    printf("Deleting an int at %p.", x);
+    delete x;
+};
+
+TEST_CASE("Custom deleter test") {
+    std::unique_ptr<int, decltype(my_deleter)> my_up { new int, my_deleter };
+    *my_up = 1;
 }
