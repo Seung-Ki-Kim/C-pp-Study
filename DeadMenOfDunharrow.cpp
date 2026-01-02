@@ -226,3 +226,53 @@ TEST_CASE("Custom deleter test") {
     std::unique_ptr<int, decltype(my_deleter)> my_up { new int, my_deleter };
     *my_up = 1;
 }
+
+using SharedOathbreakers = std::shared_ptr<DeadMenOfDunharrow>;
+
+TEST_CASE("SharedPtr can be used in copy") {
+    auto aragorn = std::make_shared<DeadMenOfDunharrow>();
+
+    SECTION("construction") {
+        auto son_of_arathorn { aragorn };
+        REQUIRE(DeadMenOfDunharrow::oaths_to_fulfill == 1);
+    }
+
+    SECTION("assignment") {
+        SharedOathbreakers son_of_arathorn;
+        son_of_arathorn = aragorn;
+        REQUIRE(DeadMenOfDunharrow::oaths_to_fulfill == 1);
+    }
+
+    SECTION("assignment, and original gets discarded") {
+        auto son_of_arathorn = std::make_shared<DeadMenOfDunharrow>();
+        REQUIRE(DeadMenOfDunharrow::oaths_to_fulfill == 2);
+
+        son_of_arathorn = aragorn;
+        REQUIRE(DeadMenOfDunharrow::oaths_to_fulfill == 1);
+    }
+}
+
+TEST_CASE("WeakPtr lock() yields") {
+    auto message = "The way is shut.";
+
+    SECTION("a shared pointer when tracked object is alive") {
+        auto aragorn = std::make_shared<DeadMenOfDunharrow>(message);
+        std::weak_ptr<DeadMenOfDunharrow> legolas { aragorn };
+
+        auto sh_ptr = legolas.lock();
+        REQUIRE(sh_ptr->message == message);
+        REQUIRE(sh_ptr.use_count() == 2);
+    }
+
+    SECTION("empty when shared pointer empty") {
+        std::weak_ptr<DeadMenOfDunharrow> legolas;
+
+        {
+            auto aragorn = std::make_shared<DeadMenOfDunharrow>(message);
+            legolas = aragorn;
+        }
+
+        auto sh_ptr = legolas.lock();
+        REQUIRE(nullptr == sh_ptr);
+    }
+}

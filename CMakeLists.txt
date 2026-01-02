@@ -8,6 +8,8 @@ find_package(Catch2 REQUIRED)
 add_executable(C-pp-Study
         DeadMenOfDunharrow.cpp
         SayHello.cpp
-        Arena.cpp)
+        Arena.cpp
+        main.cpp
+        ch11_1.cpp)
 
 target_link_libraries(C-pp-Study PRIVATE Catch2::Catch2WithMain)
